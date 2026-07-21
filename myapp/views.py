@@ -49,7 +49,11 @@ def show_exam_result(request, submission_id):
     submission = get_object_or_404(Submission, id=submission_id, student=request.user)
     passed = submission.score >= submission.total_possible * 0.7
     
+    # Sử dụng is_get_score method
+    percentage = submission.is_get_score()
+    
     return render(request, 'myapp/result.html', {
         'submission': submission,
-        'passed': passed
+        'passed': passed,
+        'percentage': percentage
     })
